@@ -1,0 +1,117 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/controls/Title.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/controls/ChangeSceneButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/controls/RetryButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/scripts/Pauseinterface.gd" type="Script" id=5]
+[ext_resource path="res://assets/button_hover.tres" type="StyleBox" id=6]
+[ext_resource path="res://assets/button_pressed.tres" type="StyleBox" id=7]
+[ext_resource path="res://assets/button_normal.tres" type="StyleBox" id=8]
+[ext_resource path="res://assets/button_disabled.tres" type="StyleBox" id=9]
+[ext_resource path="res://assets/button_focus.tres" type="StyleBox" id=10]
+
+[node name="PauseInterface" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -140.0
+margin_top = 42.0
+margin_right = -28.0
+margin_bottom = 63.0
+text = "Coins: %s"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 37.0
+margin_top = 42.0
+margin_right = 118.0
+margin_bottom = 63.0
+text = "Life: %s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -40.5
+margin_top = 42.0
+margin_right = 40.5
+margin_bottom = 63.0
+text = "Level: %s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause Overlay" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 0, 0, 0.392157 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" parent="Pause Overlay" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -210.0
+margin_top = 117.0
+margin_right = 210.0
+margin_bottom = 184.0
+text = "Paused"
+
+[node name="Revive" type="Button" parent="Pause Overlay"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -93.0
+margin_top = 193.0
+margin_right = 93.0
+margin_bottom = 220.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 10 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 8 )
+text = "Revive for %s coins?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="Pause Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -81.0
+margin_top = -65.0
+margin_right = 81.0
+margin_bottom = 65.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Retry" parent="Pause Overlay/Menu" instance=ExtResource( 4 )]
+margin_right = 162.0
+margin_bottom = 63.0
+text = "Retry"
+
+[node name="Main Menu" parent="Pause Overlay/Menu" instance=ExtResource( 3 )]
+margin_top = 67.0
+margin_right = 162.0
+margin_bottom = 130.0
+text = "Main Menu"
+nextScenePath = "res://src/screens/Main Screen.tscn"
+
+[connection signal="button_up" from="Pause Overlay/Revive" to="." method="_on_revive_button_up"]

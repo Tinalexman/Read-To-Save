@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/scripts/Moving Lights.gd" type="Script" id=1]
+[ext_resource path="res://assets/light.png" type="Texture" id=2]
+
+[node name="Moving Lights" type="Light2D"]
+texture = ExtResource( 2 )
+texture_scale = 0.75
+color = Color( 1, 0.92549, 0.662745, 1 )
+energy = 1.25
+range_height = 2.0
+shadow_enabled = true
+script = ExtResource( 1 )
